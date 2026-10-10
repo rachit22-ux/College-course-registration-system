@@ -1,0 +1,1903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EduCollege - Course Registration System</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    background:#f4f7fb;
+    color:#222;
+}
+
+/* ================= NAVBAR ================= */
+
+.navbar{
+    height:70px;
+    background:#102a43;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 7%;
+    position:sticky;
+    top:0;
+    z-index:1000;
+    box-shadow:0 3px 12px rgba(0,0,0,.2);
+}
+
+.logo{
+    font-size:23px;
+    font-weight:bold;
+}
+
+.logo span{
+    color:#4fd1c5;
+}
+
+.nav-links{
+    display:flex;
+    gap:10px;
+}
+
+.nav-links button{
+    background:transparent;
+    border:0;
+    color:white;
+    padding:10px 14px;
+    cursor:pointer;
+    font-size:14px;
+    border-radius:5px;
+}
+
+.nav-links button:hover{
+    background:#243b53;
+}
+
+/* ================= PAGES ================= */
+
+.page{
+    display:none;
+    min-height:calc(100vh - 70px);
+}
+
+.page.active{
+    display:block;
+}
+
+/* ================= HOME ================= */
+
+.hero{
+    min-height:520px;
+    background:
+    linear-gradient(rgba(16,42,67,.85),rgba(16,42,67,.88)),
+    linear-gradient(135deg,#1565c0,#6a1b9a);
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:50px 20px;
+}
+
+.hero-content{
+    max-width:800px;
+}
+
+.hero h1{
+    font-size:48px;
+    margin-bottom:20px;
+}
+
+.hero p{
+    font-size:19px;
+    line-height:1.7;
+    color:#d9e2ec;
+}
+
+.hero-buttons{
+    margin-top:30px;
+}
+
+.btn{
+    border:0;
+    padding:13px 22px;
+    border-radius:6px;
+    cursor:pointer;
+    font-weight:bold;
+    margin:5px;
+}
+
+.btn-primary{
+    background:#4fd1c5;
+    color:#102a43;
+}
+
+.btn-primary:hover{
+    background:#38b2ac;
+}
+
+.btn-light{
+    background:white;
+    color:#102a43;
+}
+
+.btn-danger{
+    background:#e53e3e;
+    color:white;
+}
+
+.btn-success{
+    background:#2f855a;
+    color:white;
+}
+
+.btn-warning{
+    background:#dd6b20;
+    color:white;
+}
+
+/* ================= SECTION ================= */
+
+.section{
+    padding:55px 7%;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:35px;
+}
+
+.section-title h2{
+    font-size:30px;
+    color:#102a43;
+}
+
+.section-title p{
+    color:#718096;
+    margin-top:8px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:25px;
+}
+
+.info-card{
+    background:white;
+    padding:30px;
+    border-radius:12px;
+    text-align:center;
+    box-shadow:0 4px 18px rgba(0,0,0,.08);
+}
+
+.info-card .icon{
+    font-size:40px;
+    margin-bottom:15px;
+}
+
+.info-card h3{
+    color:#102a43;
+    margin-bottom:10px;
+}
+
+.info-card p{
+    color:#718096;
+    line-height:1.6;
+}
+
+/* ================= LOGIN ================= */
+
+.login-page{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:50px 20px;
+    background:linear-gradient(135deg,#e6fffa,#ebf8ff);
+}
+
+.login-box{
+    width:420px;
+    max-width:100%;
+    background:white;
+    padding:40px;
+    border-radius:15px;
+    box-shadow:0 8px 30px rgba(0,0,0,.15);
+}
+
+.login-logo{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.login-logo .circle{
+    width:70px;
+    height:70px;
+    background:#102a43;
+    color:#4fd1c5;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:30px;
+    margin:auto auto 12px;
+}
+
+.login-box h2{
+    color:#102a43;
+    text-align:center;
+}
+
+.login-box .subtitle{
+    text-align:center;
+    color:#718096;
+    margin:8px 0 25px;
+}
+
+.form-group{
+    margin-bottom:17px;
+}
+
+.form-group label{
+    display:block;
+    font-weight:bold;
+    margin-bottom:7px;
+    color:#334e68;
+}
+
+.form-group input,
+.form-group select{
+    width:100%;
+    padding:13px;
+    border:1px solid #cbd5e0;
+    border-radius:6px;
+    outline:none;
+    font-size:14px;
+}
+
+.form-group input:focus,
+.form-group select:focus{
+    border-color:#319795;
+}
+
+.full-btn{
+    width:100%;
+    margin:10px 0;
+}
+
+.demo{
+    background:#f0f4f8;
+    padding:12px;
+    border-radius:6px;
+    font-size:13px;
+    text-align:center;
+    color:#52606d;
+    margin-top:15px;
+}
+
+/* ================= DASHBOARD ================= */
+
+.dashboard{
+    display:flex;
+    min-height:calc(100vh - 70px);
+}
+
+.sidebar{
+    width:240px;
+    background:#102a43;
+    color:white;
+    padding:25px 15px;
+}
+
+.sidebar h3{
+    padding:10px;
+    margin-bottom:20px;
+}
+
+.sidebar button{
+    width:100%;
+    text-align:left;
+    padding:13px;
+    margin-bottom:5px;
+    background:transparent;
+    color:white;
+    border:0;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.sidebar button:hover{
+    background:#243b53;
+}
+
+.dashboard-main{
+    flex:1;
+    padding:35px;
+    overflow:auto;
+}
+
+.dashboard-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:30px;
+}
+
+.dashboard-header h1{
+    color:#102a43;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+    margin-bottom:30px;
+}
+
+.stat{
+    background:white;
+    padding:22px;
+    border-radius:10px;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+}
+
+.stat h4{
+    color:#718096;
+    margin-bottom:10px;
+}
+
+.stat p{
+    font-size:28px;
+    font-weight:bold;
+    color:#102a43;
+}
+
+/* ================= TABLE ================= */
+
+.table-card{
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+    overflow:auto;
+}
+
+.table-card h2{
+    color:#102a43;
+    margin-bottom:18px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:650px;
+}
+
+th{
+    background:#102a43;
+    color:white;
+    padding:13px;
+    text-align:left;
+}
+
+td{
+    padding:12px;
+    border-bottom:1px solid #e2e8f0;
+}
+
+tr:hover{
+    background:#f7fafc;
+}
+
+/* ================= COURSE GRID ================= */
+
+.course-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.course-card{
+    background:white;
+    border-radius:10px;
+    padding:22px;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+    border-left:5px solid #319795;
+}
+
+.course-card h3{
+    color:#102a43;
+    margin-bottom:8px;
+}
+
+.course-code{
+    color:#319795;
+    font-weight:bold;
+}
+
+.course-card p{
+    color:#718096;
+    margin:7px 0;
+}
+
+/* ================= ALERT ================= */
+
+.alert{
+    display:none;
+    padding:13px;
+    margin-bottom:15px;
+    border-radius:6px;
+    font-weight:bold;
+}
+
+.alert.success{
+    display:block;
+    background:#c6f6d5;
+    color:#22543d;
+}
+
+.alert.error{
+    display:block;
+    background:#fed7d7;
+    color:#742a2a;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+    background:#102a43;
+    color:white;
+    text-align:center;
+    padding:22px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:900px){
+
+    .cards,
+    .course-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .stats{
+        grid-template-columns:1fr 1fr;
+    }
+
+}
+
+@media(max-width:700px){
+
+    .navbar{
+        padding:0 15px;
+    }
+
+    .nav-links{
+        display:none;
+    }
+
+    .hero h1{
+        font-size:34px;
+    }
+
+    .cards,
+    .course-grid,
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .dashboard{
+        flex-direction:column;
+    }
+
+    .sidebar{
+        width:100%;
+    }
+
+    .dashboard-main{
+        padding:20px;
+    }
+
+    .dashboard-header{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:15px;
+    }
+
+}
+
+/* ================= ADMIN SPECIAL ================= */
+
+.admin-badge{
+    background:#805ad5;
+    color:white;
+    padding:5px 10px;
+    border-radius:20px;
+    font-size:12px;
+}
+
+.student-badge{
+    background:#319795;
+    color:white;
+    padding:5px 10px;
+    border-radius:20px;
+    font-size:12px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        Edu<span>College</span>
+    </div>
+
+    <div class="nav-links">
+        <button onclick="showPage('home')">Home</button>
+        <button onclick="showPage('studentLogin')">Student Login</button>
+        <button onclick="showPage('adminLogin')">Admin Login</button>
+        <button onclick="showPage('about')">About</button>
+    </div>
+
+</nav>
+
+
+<!-- =====================================================
+                     HOME PAGE
+===================================================== -->
+
+<section id="home" class="page active">
+
+    <div class="hero">
+
+        <div class="hero-content">
+
+            <h1>College Course Registration System</h1>
+
+            <p>
+                Welcome to EduCollege's online course registration
+                portal. Register for your semester courses,
+                manage your academic information and view
+                your registration details online.
+            </p>
+
+            <div class="hero-buttons">
+
+                <button class="btn btn-primary"
+                        onclick="showPage('studentLogin')">
+                    Student Portal
+                </button>
+
+                <button class="btn btn-light"
+                        onclick="showPage('adminLogin')">
+                    Admin Portal
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="section">
+
+        <div class="section-title">
+            <h2>Our Portal Features</h2>
+            <p>Everything you need for course registration</p>
+        </div>
+
+        <div class="cards">
+
+            <div class="info-card">
+                <div class="icon">🎓</div>
+                <h3>Student Registration</h3>
+                <p>
+                    Students can register for available
+                    courses quickly and easily.
+                </p>
+            </div>
+
+            <div class="info-card">
+                <div class="icon">📚</div>
+                <h3>Course Management</h3>
+                <p>
+                    View available courses, credits,
+                    departments and course information.
+                </p>
+            </div>
+
+            <div class="info-card">
+                <div class="icon">🔐</div>
+                <h3>Admin Portal</h3>
+                <p>
+                    Administrators can manage courses
+                    and view student registrations.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <footer>
+        © 2026 EduCollege | College Course Registration System
+    </footer>
+
+</section>
+
+
+<!-- =====================================================
+                  STUDENT LOGIN
+===================================================== -->
+
+<section id="studentLogin" class="page login-page">
+
+    <div class="login-box">
+
+        <div class="login-logo">
+
+            <div class="circle">🎓</div>
+
+            <h2>Student Login</h2>
+
+            <p class="subtitle">
+                Access your student portal
+            </p>
+
+        </div>
+
+        <div id="studentAlert" class="alert"></div>
+
+        <div class="form-group">
+
+            <label>Student ID</label>
+
+            <input
+                type="text"
+                id="studentId"
+                placeholder="Enter Student ID">
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Password</label>
+
+            <input
+                type="password"
+                id="studentPassword"
+                placeholder="Enter Password">
+
+        </div>
+
+        <button
+            class="btn btn-primary full-btn"
+            onclick="studentLogin()">
+
+            Login to Student Portal
+
+        </button>
+
+        <button
+            class="btn full-btn"
+            onclick="showPage('home')">
+
+            ← Back to Home
+
+        </button>
+
+        <div class="demo">
+
+            Demo Student Login:<br>
+            ID: <b>STU001</b> |
+            Password: <b>student123</b>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+                    ADMIN LOGIN
+===================================================== -->
+
+<section id="adminLogin" class="page login-page">
+
+    <div class="login-box">
+
+        <div class="login-logo">
+
+            <div class="circle">🔐</div>
+
+            <h2>Administrator Login</h2>
+
+            <p class="subtitle">
+                Secure College Administration Portal
+            </p>
+
+        </div>
+
+        <div id="adminAlert" class="alert"></div>
+
+        <div class="form-group">
+
+            <label>Admin Username</label>
+
+            <input
+                type="text"
+                id="adminUsername"
+                placeholder="Enter username">
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Password</label>
+
+            <input
+                type="password"
+                id="adminPassword"
+                placeholder="Enter password">
+
+        </div>
+
+        <button
+            class="btn btn-primary full-btn"
+            onclick="adminLogin()">
+
+            Login as Administrator
+
+        </button>
+
+        <button
+            class="btn full-btn"
+            onclick="showPage('home')">
+
+            ← Back to Home
+
+        </button>
+
+        <div class="demo">
+
+            Demo Admin Login:<br>
+            Username: <b>admin</b> |
+            Password: <b>admin123</b>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+                  STUDENT DASHBOARD
+===================================================== -->
+
+<section id="studentDashboard" class="page">
+
+    <div class="dashboard">
+
+        <aside class="sidebar">
+
+            <h3>🎓 Student Portal</h3>
+
+            <button onclick="studentSection('studentHome')">
+                🏠 Dashboard
+            </button>
+
+            <button onclick="studentSection('availableCourses')">
+                📚 Available Courses
+            </button>
+
+            <button onclick="studentSection('myCourses')">
+                📝 My Registration
+            </button>
+
+            <button onclick="logout()">
+                🚪 Logout
+            </button>
+
+        </aside>
+
+
+        <main class="dashboard-main">
+
+            <!-- Student Home -->
+
+            <div id="studentHome">
+
+                <div class="dashboard-header">
+
+                    <div>
+                        <h1>Student Dashboard</h1>
+                        <p>Welcome, <span id="welcomeStudent">Student</span></p>
+                    </div>
+
+                    <span class="student-badge">
+                        STUDENT
+                    </span>
+
+                </div>
+
+                <div class="stats">
+
+                    <div class="stat">
+                        <h4>Available Courses</h4>
+                        <p id="studentAvailableCount">0</p>
+                    </div>
+
+                    <div class="stat">
+                        <h4>Registered Courses</h4>
+                        <p id="studentRegisteredCount">0</p>
+                    </div>
+
+                    <div class="stat">
+                        <h4>Total Credits</h4>
+                        <p id="studentCreditCount">0</p>
+                    </div>
+
+                    <div class="stat">
+                        <h4>Semester</h4>
+                        <p>6</p>
+                    </div>
+
+                </div>
+
+                <div class="table-card">
+
+                    <h2>Quick Information</h2>
+
+                    <p style="line-height:2;color:#52606d;">
+                        Welcome to your student dashboard.
+                        From here you can view available courses,
+                        register for courses and check your
+                        current registration.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Available Courses -->
+
+            <div id="availableCourses" style="display:none;">
+
+                <div class="dashboard-header">
+
+                    <h1>Available Courses</h1>
+
+                </div>
+
+                <div class="course-grid" id="studentCourseGrid">
+                </div>
+
+            </div>
+
+
+            <!-- My Courses -->
+
+            <div id="myCourses" style="display:none;">
+
+                <div class="dashboard-header">
+
+                    <h1>My Course Registration</h1>
+
+                </div>
+
+                <div class="table-card">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+                                <th>Code</th>
+                                <th>Course</th>
+                                <th>Department</th>
+                                <th>Credits</th>
+                                <th>Status</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="studentRegistrationTable">
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+                    ADMIN DASHBOARD
+===================================================== -->
+
+<section id="adminDashboard" class="page">
+
+    <div class="dashboard">
+
+        <aside class="sidebar">
+
+            <h3>🔐 Admin Panel</h3>
+
+            <button onclick="adminSection('adminHome')">
+                🏠 Dashboard
+            </button>
+
+            <button onclick="adminSection('manageCourses')">
+                📚 Manage Courses
+            </button>
+
+            <button onclick="adminSection('registrations')">
+                👨‍🎓 Student Registrations
+            </button>
+
+            <button onclick="logout()">
+                🚪 Logout
+            </button>
+
+        </aside>
+
+
+        <main class="dashboard-main">
+
+            <!-- Admin Home -->
+
+            <div id="adminHome">
+
+                <div class="dashboard-header">
+
+                    <div>
+
+                        <h1>Admin Dashboard</h1>
+
+                        <p>
+                            College Course Registration Management
+                        </p>
+
+                    </div>
+
+                    <span class="admin-badge">
+                        ADMINISTRATOR
+                    </span>
+
+                </div>
+
+                <div class="stats">
+
+                    <div class="stat">
+
+                        <h4>Total Courses</h4>
+
+                        <p id="adminCourseCount">
+                            0
+                        </p>
+
+                    </div>
+
+                    <div class="stat">
+
+                        <h4>Registered Students</h4>
+
+                        <p>
+                            1
+                        </p>
+
+                    </div>
+
+                    <div class="stat">
+
+                        <h4>Departments</h4>
+
+                        <p>
+                            6
+                        </p>
+
+                    </div>
+
+                    <div class="stat">
+
+                        <h4>Semester</h4>
+
+                        <p>
+                            2026
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="table-card">
+
+                    <h2>System Overview</h2>
+
+                    <p style="line-height:2;color:#52606d;">
+
+                        Use the administration panel to manage
+                        available courses and view student
+                        registrations.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Manage Courses -->
+
+            <div id="manageCourses" style="display:none;">
+
+                <div class="dashboard-header">
+
+                    <h1>Manage Courses</h1>
+
+                </div>
+
+                <div class="table-card">
+
+                    <h2>Add New Course</h2>
+
+                    <div style="
+                        display:grid;
+                        grid-template-columns:
+                        repeat(4,1fr);
+                        gap:10px;
+                        margin-bottom:25px;">
+
+                        <input
+                            id="newCode"
+                            placeholder="Course Code"
+                            style="padding:12px;">
+
+                        <input
+                            id="newName"
+                            placeholder="Course Name"
+                            style="padding:12px;">
+
+                        <input
+                            id="newDept"
+                            placeholder="Department"
+                            style="padding:12px;">
+
+                        <input
+                            id="newCredits"
+                            type="number"
+                            placeholder="Credits"
+                            style="padding:12px;">
+
+                    </div>
+
+                    <button
+                        class="btn btn-success"
+                        onclick="addNewCourse()">
+
+                        + Add Course
+
+                    </button>
+
+                </div>
+
+                <br>
+
+                <div class="table-card">
+
+                    <h2>Course List</h2>
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+                                <th>Code</th>
+                                <th>Course Name</th>
+                                <th>Department</th>
+                                <th>Credits</th>
+                                <th>Action</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="adminCourseTable">
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+
+            <!-- Registrations -->
+
+            <div id="registrations" style="display:none;">
+
+                <div class="dashboard-header">
+
+                    <h1>Student Registrations</h1>
+
+                </div>
+
+                <div class="table-card">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+                                <th>Student ID</th>
+                                <th>Student Name</th>
+                                <th>Department</th>
+                                <th>Course</th>
+                                <th>Credits</th>
+                                <th>Status</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="adminRegistrationTable">
+
+                            <tr>
+
+                                <td>STU001</td>
+                                <td>Demo Student</td>
+                                <td>Computer Science</td>
+                                <td>Data Structures</td>
+                                <td>4</td>
+                                <td>
+                                    <span style="color:#2f855a;">
+                                        Registered
+                                    </span>
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+                         ABOUT
+===================================================== -->
+
+<section id="about" class="page">
+
+    <div class="section">
+
+        <div class="section-title">
+
+            <h2>About EduCollege</h2>
+
+            <p>
+                College Course Registration System
+            </p>
+
+        </div>
+
+        <div class="info-card" style="max-width:800px;margin:auto;">
+
+            <div class="icon">🏫</div>
+
+            <h3>EduCollege</h3>
+
+            <p>
+                EduCollege provides an online course registration
+                platform for students and administrators.
+                Students can browse available courses and
+                register for their semester courses, while
+                administrators can manage the course catalog
+                and view registrations.
+            </p>
+
+        </div>
+
+    </div>
+
+    <footer>
+        © 2026 EduCollege
+    </footer>
+
+</section>
+
+
+<script>
+
+/* =====================================================
+                    DATA
+===================================================== */
+
+let courses = [
+
+    {
+        code:"CS101",
+        name:"Introduction to Programming",
+        dept:"Computer Science",
+        credits:4
+    },
+
+    {
+        code:"CS102",
+        name:"Data Structures",
+        dept:"Computer Science",
+        credits:4
+    },
+
+    {
+        code:"CS201",
+        name:"Database Management System",
+        dept:"Computer Science",
+        credits:3
+    },
+
+    {
+        code:"CS202",
+        name:"Web Development",
+        dept:"Information Technology",
+        credits:3
+    },
+
+    {
+        code:"CS301",
+        name:"Operating Systems",
+        dept:"Computer Science",
+        credits:4
+    },
+
+    {
+        code:"CS302",
+        name:"Computer Networks",
+        dept:"Information Technology",
+        credits:3
+    },
+
+    {
+        code:"CS401",
+        name:"Artificial Intelligence",
+        dept:"Computer Science",
+        credits:4
+    },
+
+    {
+        code:"CS402",
+        name:"Machine Learning",
+        dept:"Computer Science",
+        credits:4
+    }
+
+];
+
+let registeredCourses = [];
+
+
+/* =====================================================
+                    PAGE NAVIGATION
+===================================================== */
+
+function showPage(pageId){
+
+    document
+        .querySelectorAll(".page")
+        .forEach(page=>{
+            page.classList.remove("active");
+        });
+
+    document
+        .getElementById(pageId)
+        .classList.add("active");
+
+    window.scrollTo(0,0);
+
+}
+
+
+/* =====================================================
+                    STUDENT LOGIN
+===================================================== */
+
+function studentLogin(){
+
+    const id =
+        document.getElementById("studentId").value;
+
+    const password =
+        document.getElementById("studentPassword").value;
+
+    if(id === "STU001" && password === "student123"){
+
+        document.getElementById(
+            "welcomeStudent"
+        ).innerText = "Demo Student";
+
+        updateStudentDashboard();
+
+        showPage("studentDashboard");
+
+    }else{
+
+        showAlert(
+            "studentAlert",
+            "Invalid Student ID or Password.",
+            "error"
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+                     ADMIN LOGIN
+===================================================== */
+
+function adminLogin(){
+
+    const username =
+        document.getElementById("adminUsername").value;
+
+    const password =
+        document.getElementById("adminPassword").value;
+
+    if(
+        username === "admin" &&
+        password === "admin123"
+    ){
+
+        updateAdminDashboard();
+
+        showPage("adminDashboard");
+
+    }else{
+
+        showAlert(
+            "adminAlert",
+            "Invalid Admin Username or Password.",
+            "error"
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+                       ALERT
+===================================================== */
+
+function showAlert(id,text,type){
+
+    const alert =
+        document.getElementById(id);
+
+    alert.innerText = text;
+
+    alert.className =
+        "alert " + type;
+
+    setTimeout(()=>{
+        alert.className="alert";
+    },3000);
+
+}
+
+
+/* =====================================================
+                STUDENT DASHBOARD
+===================================================== */
+
+function studentSection(section){
+
+    document
+        .getElementById("studentHome")
+        .style.display="none";
+
+    document
+        .getElementById("availableCourses")
+        .style.display="none";
+
+    document
+        .getElementById("myCourses")
+        .style.display="none";
+
+    document
+        .getElementById(section)
+        .style.display="block";
+
+    if(section === "availableCourses"){
+        renderStudentCourses();
+    }
+
+    if(section === "myCourses"){
+        renderStudentRegistration();
+    }
+
+}
+
+
+/* =====================================================
+                RENDER STUDENT COURSES
+===================================================== */
+
+function renderStudentCourses(){
+
+    const grid =
+        document.getElementById(
+            "studentCourseGrid"
+        );
+
+    grid.innerHTML="";
+
+    courses.forEach((course,index)=>{
+
+        const card =
+            document.createElement("div");
+
+        card.className="course-card";
+
+        const already =
+            registeredCourses.some(
+                c=>c.code===course.code
+            );
+
+        card.innerHTML=`
+
+            <div class="course-code">
+                ${course.code}
+            </div>
+
+            <h3>${course.name}</h3>
+
+            <p>
+                🏫 ${course.dept}
+            </p>
+
+            <p>
+                📚 ${course.credits} Credits
+            </p>
+
+            <button
+                class="btn ${
+                    already
+                    ? "btn-warning"
+                    : "btn-primary"
+                }"
+                onclick="registerCourse(${index})">
+
+                ${
+                    already
+                    ? "Already Registered"
+                    : "Register Course"
+                }
+
+            </button>
+
+        `;
+
+        grid.appendChild(card);
+
+    });
+
+}
+
+
+/* =====================================================
+                 REGISTER COURSE
+===================================================== */
+
+function registerCourse(index){
+
+    const course =
+        courses[index];
+
+    const exists =
+        registeredCourses.some(
+            c=>c.code===course.code
+        );
+
+    if(exists){
+
+        alert(
+            "You have already registered for this course."
+        );
+
+        return;
+    }
+
+    registeredCourses.push(course);
+
+    updateStudentDashboard();
+
+    renderStudentCourses();
+
+    alert(
+        course.name +
+        " registered successfully!"
+    );
+
+}
+
+
+/* =====================================================
+                STUDENT REGISTRATION
+===================================================== */
+
+function renderStudentRegistration(){
+
+    const table =
+        document.getElementById(
+            "studentRegistrationTable"
+        );
+
+    table.innerHTML="";
+
+    if(registeredCourses.length===0){
+
+        table.innerHTML=`
+
+            <tr>
+                <td colspan="5"
+                    style="text-align:center;">
+                    No courses registered yet.
+                </td>
+            </tr>
+
+        `;
+
+        return;
+    }
+
+    registeredCourses.forEach(course=>{
+
+        table.innerHTML += `
+
+            <tr>
+
+                <td>${course.code}</td>
+
+                <td>${course.name}</td>
+
+                <td>${course.dept}</td>
+
+                <td>${course.credits}</td>
+
+                <td>
+                    <span style="color:#2f855a;font-weight:bold;">
+                        Registered
+                    </span>
+                </td>
+
+            </tr>
+
+        `;
+
+    });
+
+}
+
+
+/* =====================================================
+                UPDATE STUDENT STATS
+===================================================== */
+
+function updateStudentDashboard(){
+
+    document.getElementById(
+        "studentAvailableCount"
+    ).innerText = courses.length;
+
+    document.getElementById(
+        "studentRegisteredCount"
+    ).innerText =
+        registeredCourses.length;
+
+    const credits =
+        registeredCourses.reduce(
+            (sum,c)=>sum+c.credits,
+            0
+        );
+
+    document.getElementById(
+        "studentCreditCount"
+    ).innerText = credits;
+
+}
+
+
+/* =====================================================
+                    ADMIN SECTION
+===================================================== */
+
+function adminSection(section){
+
+    document
+        .getElementById("adminHome")
+        .style.display="none";
+
+    document
+        .getElementById("manageCourses")
+        .style.display="none";
+
+    document
+        .getElementById("registrations")
+        .style.display="none";
+
+    document
+        .getElementById(section)
+        .style.display="block";
+
+    if(section==="manageCourses"){
+        renderAdminCourses();
+    }
+
+}
+
+
+/* =====================================================
+                    ADMIN DASHBOARD
+===================================================== */
+
+function updateAdminDashboard(){
+
+    document.getElementById(
+        "adminCourseCount"
+    ).innerText = courses.length;
+
+}
+
+
+/* =====================================================
+                    ADMIN COURSE TABLE
+===================================================== */
+
+function renderAdminCourses(){
+
+    const table =
+        document.getElementById(
+            "adminCourseTable"
+        );
+
+    table.innerHTML="";
+
+    courses.forEach((course,index)=>{
+
+        table.innerHTML += `
+
+            <tr>
+
+                <td>${course.code}</td>
+
+                <td>${course.name}</td>
+
+                <td>${course.dept}</td>
+
+                <td>${course.credits}</td>
+
+                <td>
+
+                    <button
+                        class="btn btn-danger"
+                        onclick="deleteCourse(${index})">
+
+                        Delete
+
+                    </button>
+
+                </td>
+
+            </tr>
+
+        `;
+
+    });
+
+}
+
+
+/* =====================================================
+                    ADD NEW COURSE
+===================================================== */
+
+function addNewCourse(){
+
+    const code =
+        document.getElementById(
+            "newCode"
+        ).value.trim();
+
+    const name =
+        document.getElementById(
+            "newName"
+        ).value.trim();
+
+    const dept =
+        document.getElementById(
+            "newDept"
+        ).value.trim();
+
+    const credits =
+        parseInt(
+            document.getElementById(
+                "newCredits"
+            ).value
+        );
+
+
+    if(
+        !code ||
+        !name ||
+        !dept ||
+        !credits
+    ){
+
+        alert(
+            "Please fill all course fields."
+        );
+
+        return;
+    }
+
+
+    const exists =
+        courses.some(
+            c=>c.code.toLowerCase()
+            ===code.toLowerCase()
+        );
+
+
+    if(exists){
+
+        alert(
+            "Course code already exists."
+        );
+
+        return;
+    }
+
+
+    courses.push({
+
+        code:code,
+        name:name,
+        dept:dept,
+        credits:credits
+
+    });
+
+
+    document.getElementById(
+        "newCode"
+    ).value="";
+
+    document.getElementById(
+        "newName"
+    ).value="";
+
+    document.getElementById(
+        "newDept"
+    ).value="";
+
+    document.getElementById(
+        "newCredits"
+    ).value="";
+
+
+    renderAdminCourses();
+
+    updateAdminDashboard();
+
+    updateStudentDashboard();
+
+
+    alert(
+        "Course added successfully!"
+    );
+
+}
+
+
+/* =====================================================
+                    DELETE COURSE
+===================================================== */
+
+function deleteCourse(index){
+
+    const course =
+        courses[index];
+
+    const confirmDelete =
+        confirm(
+            "Delete " +
+            course.name +
+            "?"
+        );
+
+    if(!confirmDelete){
+        return;
+    }
+
+
+    courses.splice(index,1);
+
+
+    registeredCourses =
+        registeredCourses.filter(
+            c=>c.code!==course.code
+        );
+
+
+    renderAdminCourses();
+
+    updateAdminDashboard();
+
+    updateStudentDashboard();
+
+    alert(
+        "Course deleted successfully."
+    );
+
+}
+
+
+/* =====================================================
+                         LOGOUT
+===================================================== */
+
+function logout(){
+
+    alert(
+        "You have been logged out."
+    );
+
+    showPage("home");
+
+}
+
+
+/* =====================================================
+                   INITIAL LOAD
+===================================================== */
+
+updateStudentDashboard();
+updateAdminDashboard();
+
+</script>
+
+</body>
+</html>
+
